@@ -7,13 +7,13 @@ local cough = {
 	"ambient/voices/cough4.wav"
 }
 
-table.insert(PEVENTS, function(attacker, attacker)
+table.insert(PEVENTS, function(ply, dmginfo)
 	if not GetConVar("playerstats_poison"):GetBool() then 
 		return 
 	end
 
 	if IsValid(ply) then
-		if attacker:IsDamageType(DMG_POISON) or attacker:IsDamageType(DMG_RADIATION) or attacker:IsDamageType(DMG_ACID) then
+		if dmginfo:IsDamageType(DMG_POISON) or dmginfo:IsDamageType(DMG_RADIATION) or dmginfo:IsDamageType(DMG_ACID) then
 			ply:SetNWBool("isPoisoned", true)
 
 			timer.Create("PoisonFlash" .. ply:EntIndex(), 4, 0, function()
